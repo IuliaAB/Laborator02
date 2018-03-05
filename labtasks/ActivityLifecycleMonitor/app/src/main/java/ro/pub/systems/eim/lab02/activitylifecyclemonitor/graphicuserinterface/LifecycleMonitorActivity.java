@@ -17,7 +17,7 @@ import ro.pub.systems.eim.lab02.activitylifecyclemonitor.general.Utilities;
 public class LifecycleMonitorActivity extends AppCompatActivity {
 
     private ButtonClickListener buttonClickListener = new ButtonClickListener();
-
+    private static boolean flag = false;
     private class ButtonClickListener implements Button.OnClickListener {
 
         @Override
@@ -62,7 +62,50 @@ public class LifecycleMonitorActivity extends AppCompatActivity {
         Button cancelButton = (Button) findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(buttonClickListener);
 
-        Log.d(Constants.TAG, "onCreate() method was invoked without a previous state");
+        if (flag == false) {
+            Log.d(Constants.TAG, "onCreate() method was invoked without a previous state");
+
+        }
+        else {
+            Log.d(Constants.TAG, "onCreate() method was invoked more than once");
+        }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(Constants.TAG, "onStart() method was invoked");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        flag = true;
+        Log.d(Constants.TAG, "onRestart() method was invoked");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(Constants.TAG, "onResume() method was invoked");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(Constants.TAG, "onPost() method was invoked");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(Constants.TAG, "onStop() method was invoked");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(Constants.TAG, "onDestroy() method was invoked");
+    }
 }
